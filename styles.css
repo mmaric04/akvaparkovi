@@ -439,6 +439,12 @@ img {
   box-shadow: var(--shadow);
 }
 
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
 #priceChart {
   width: 100%;
   min-height: 400px;

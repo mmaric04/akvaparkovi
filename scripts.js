@@ -335,7 +335,7 @@ function createPieChart() {
     const containerWidth = container.offsetWidth;
     
     const width = Math.min(containerWidth, 500);
-    const height = 400;
+    const height = 350;
     const radius = Math.min(width, height) / 2 - 40;
     
     const sortedData = [...aquaparkData].sort((a, b) => b.price - a.price);
@@ -343,7 +343,7 @@ function createPieChart() {
     const svg = d3.select('#priceChart')
         .append('svg')
         .attr('width', containerWidth)
-        .attr('height', height)
+        .attr('height', height + 180)
         .append('g')
         .attr('transform', `translate(${containerWidth / 2},${height / 2})`);
     
@@ -438,7 +438,14 @@ function createPieChart() {
         .enter()
         .append('g')
         .attr('class', 'legend')
-        .attr('transform', (d, i) => `translate(${radius + 30}, ${i * 25 - (sortedData.length * 25) / 2})`);
+        .attr('transform', (d, i) => {
+            const itemsPerRow = Math.max(1, Math.floor(containerWidth / 200));
+            const row = Math.floor(i / itemsPerRow);
+            const col = i % itemsPerRow;
+            const xPos = col * (containerWidth / itemsPerRow) - containerWidth / 2 + 50;
+            const yPos = radius + 80 + (row * 30);
+            return `translate(${xPos}, ${yPos})`;
+        });
     
     legend.append('rect')
         .attr('width', 18)
