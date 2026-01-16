@@ -1086,7 +1086,19 @@
           
           <!-- Google Sign-In Button -->
           <div class="d-flex justify-content-center mb-3">
-            <div id="googleSignInButton"></div>
+            <div id="googleSignInButton">
+              <!-- Loading placeholder dok se Google Auth učitava -->
+              <div class="d-flex align-items-center justify-content-center" style="width: 280px; height: 44px; border: 1px solid #dadce0; border-radius: 4px;">
+                <span class="spinner-border spinner-border-sm text-primary me-2"></span>
+                <span class="text-muted">Učitavam Google prijavu...</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Fallback poruka ako se Auth ne učita -->
+          <div id="googleAuthFallback" class="alert alert-warning" style="display: none;">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            Google prijava nije dostupna. <a href="javascript:location.reload()">Osvježite stranicu</a> ili pokušajte kasnije.
           </div>
           
           <div class="divider d-flex align-items-center my-3">
@@ -1111,12 +1123,15 @@
   <script src="scripts.js"></script>
   
   <!-- Google Identity Services Library for OAuth -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
   <script src="config.js"></script>
   
   <script>
     // OAuth za Analytics pristup
     let tokenClient;
+    let googleAuthReady = false;
+    let authInitAttempts = 0;
+    const MAX_AUTH_ATTEMPTS = 50; // Max 5 sekundi (50 * 100ms)
     
     const SCOPES = [
       'https://www.googleapis.com/auth/analytics.readonly',
@@ -1126,34 +1141,52 @@
     
     // Inicijaliziraj Google Auth kada se library učita
     function initGoogleAuth() {
-      if (typeof google === 'undefined') {
-        setTimeout(initGoogleAuth, 100);
+      authInitAttempts++;
+      
+      if (typeof google === 'undefined' || typeof google.accounts === 'undefined') {
+        if (authInitAttempts < MAX_AUTH_ATTEMPTS) {
+          setTimeout(initGoogleAuth, 100);
+        } else {
+          console.error('Google Auth library nije se uspjela učitati nakon 5 sekundi');
+          googleAuthReady = false;
+          // Prikaži fallback gumb ako je modal otvoren
+          const fallbackMsg = document.getElementById('googleAuthFallback');
+          if (fallbackMsg) fallbackMsg.style.display = 'block';
+        }
         return;
       }
       
-      // OAuth token client za programatski pristup
-      tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CONFIG.GOOGLE_CLIENT_ID,
-        scope: SCOPES,
-        callback: handleTokenResponse,
-      });
-      
-      // Renderaj Google Sign-In gumb u modal
-      google.accounts.id.initialize({
-        client_id: CONFIG.GOOGLE_CLIENT_ID,
-        callback: handleGoogleSignInResponse
-      });
-      
-      google.accounts.id.renderButton(
-        document.getElementById('googleSignInButton'),
-        { 
-          theme: 'outline', 
-          size: 'large',
-          text: 'signin_with',
-          shape: 'rectangular',
-          width: 280
-        }
-      );
+      try {
+        // OAuth token client za programatski pristup
+        tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: CONFIG.GOOGLE_CLIENT_ID,
+          scope: SCOPES,
+          callback: handleTokenResponse,
+        });
+        
+        // Renderaj Google Sign-In gumb u modal
+        google.accounts.id.initialize({
+          client_id: CONFIG.GOOGLE_CLIENT_ID,
+          callback: handleGoogleSignInResponse
+        });
+        
+        google.accounts.id.renderButton(
+          document.getElementById('googleSignInButton'),
+          { 
+            theme: 'outline', 
+            size: 'large',
+            text: 'signin_with',
+            shape: 'rectangular',
+            width: 280
+          }
+        );
+        
+        googleAuthReady = true;
+        console.log('Google Auth uspješno inicijaliziran');
+      } catch (error) {
+        console.error('Greška pri inicijalizaciji Google Auth:', error);
+        googleAuthReady = false;
+      }
     }
     
     // Pokreni inicijalizaciju
@@ -1179,10 +1212,30 @@
     
     // Prijava putem popup-a (alternativna metoda)
     function signInWithPopup() {
-      if (tokenClient) {
+      if (tokenClient && googleAuthReady) {
         tokenClient.requestAccessToken({ prompt: 'consent' });
+      } else if (!googleAuthReady && authInitAttempts >= MAX_AUTH_ATTEMPTS) {
+        // Auth se nije uspio učitati - ponudi reload
+        if (confirm('Google prijava nije dostupna. Moguće je da je mreža spora ili je Google servis blokiran.\n\nŽelite li ponovno učitati stranicu?')) {
+          location.reload();
+        }
       } else {
-        alert('Google Auth se još učitava. Pokušajte ponovno za nekoliko sekundi.');
+        // Još se učitava - prikaži loading indicator
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Učitavam...';
+        btn.disabled = true;
+        
+        // Pokušaj ponovno nakon kratke pauze
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+          if (tokenClient && googleAuthReady) {
+            tokenClient.requestAccessToken({ prompt: 'consent' });
+          } else {
+            alert('Google prijava još nije spremna. Molimo pričekajte nekoliko sekundi i pokušajte ponovno.');
+          }
+        }, 2000);
       }
     }
     
