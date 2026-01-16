@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="hr-HR">
+<head>
+  <title>Akvaparkovi u Hrvatskoj</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Otkrijte najbolje akvaparkove u Hrvatskoj - Istralandia, Aquacolors Poreč, Aquapark Dalmatia, Aquapark Čikat, Aquapark Martilandia i Aquapark Dalmaland.">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K41V3G1YGJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K41V3G1YGJ');
+  </script>
+  
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico.png">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="home" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="80">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        <i class="bi bi-water"></i> Akvaparkovi u Hrvatskoj
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">O nama</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#parks">Akvaparkovi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#prices">Cijene</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="hero" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10">
+          <div class="hero-content slideanim">
+            <h1 class="display-2 fw-bold text-white mb-4">Akvaparkovi u Hrvatskoj</h1>
+            <p class="lead text-white mb-5">Otkrijte vodene avanture diljem Hrvatske - od Istre do Dalmacije!</p>
+            <a href="#parks" class="btn btn-primary btn-lg me-3">
+              <i class="bi bi-water me-2"></i>Istražite Parkove
+            </a>
+            <a href="#prices" class="btn btn-outline-light btn-lg">
+              <i class="bi bi-tag me-2"></i>Pogledajte Cijene
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wave-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 slideanim">
+          <h2 class="section-title">Vodena Zabava za Cijelu Obitelj</h2>
+          <p class="lead text-muted">Vodeni parkovi predstavljaju savršen plan za uživanje u ljetnim radostima za cijelu obitelj.</p>
+          <p>Spustite se niz beskrajne tobogane, skačite s najviših trampolina i uronite u nevjerojatne bazene te uživajte u aktivnom odmoru na vodi.</p>
+          <p>Plivajte u najvećem bazenu s valovima na Sredozemlju u Istralandiji. Zabavite se u akvaparku Solaris blizu Šibenika. Osjetite uzbuđenje parka Aquacolors u Poreču, najvećem adrenalinskom parku u Hrvatskoj.</p>
+          <p>Uronite u morsku oazu zabave okruženi mirisima borove šume Čikata. Uživajte u savršenom spoju istarske obale i osvježavajuće vodene zabave u akvaparku Martilandia. Otkrijte šareni svijet tobogana i prskajućih atrakcija u srcu Fažane.</p>
+          <p class="fw-bold text-primary fs-4 mt-4"></i>Zabavi nema kraja!</p>
+        </div>
+        <div class="col-lg-6 slideanim">
+          <div class="about-image-container">
+            <img src="https://zakopane24.pl/wp-content/uploads/2024/08/zakopane-aquapark.jpg" alt="Akvapark zabava" class="img-fluid rounded shadow-lg">
+            <div class="floating-badge">
+              <span class="badge bg-primary fs-5">6 Akvaparkova</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section py-5 bg-light">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4 mb-4 slideanim">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-tsunami"></i>
+            </div>
+            <h4>Tobogani</h4>
+            <p>Uzbudljivi tobogani za sve uzraste - od obiteljskih do ekstremnih adrenalinskih!</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 slideanim">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-people-fill"></i>
+            </div>
+            <h4>Obiteljska Zabava</h4>
+            <p>Sadržaji prilagođeni svim generacijama - od malenih do odraslih posjetitelja.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 slideanim">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-sun-fill"></i>
+            </div>
+            <h4>Ljetno Osvježenje</h4>
+            <p>Savršen bijeg od ljetnih vrućina uz osvježavajuće bazene i vodene atrakcije.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parks Section -->
+  <section id="parks" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5 slideanim">
+        <h2 class="section-title">Naši Akvaparkovi</h2>
+        <p class="text-muted">Upoznajte 6 najboljih vodenih parkova u Hrvatskoj</p>
+      </div>
+      
+      <div class="row g-4">
+        <!-- Park 1 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/istralandia/istralandia.jpg" alt="Aquapark Istralandia">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal1">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquapark Istralandia</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Brtonigla, Istra</p>
+              <p>Najveći akvapark u Hrvatskoj s bazenom s valovima koji je najveći na Sredozemlju.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <span class="ms-2">4.5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Park 2 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/porec/porec.png" alt="Aquacolors Poreč">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal2">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquacolors Poreč</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Poreč, Istra</p>
+              <p>Najveći adrenalinski vodeni park u Hrvatskoj s preko 20 tobogana i atrakcija.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <span class="ms-2">4.4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Park 3 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/sibenik/sibenik.jpg" alt="Aquapark Dalmatia">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal3">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquapark Dalmatia</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Šibenik, Dalmacija</p>
+              <p>Moderni zatvoreni akvapark u sklopu resorta Amadria Park Šibenik.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+                <span class="ms-2">4.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Park 4 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/cikat/cikat.jpeg" alt="Aquapark Čikat">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal4">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquapark Čikat</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Mali Lošinj, Kvarner</p>
+              <p>Morska oaza zabave okružena mirisima borove šume na otoku Lošinju.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <span class="ms-2">4.5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Park 5 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/martilandia/martilandia.jpg" alt="Aquapark Martilandia">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal5">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquapark Martilandia</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Fažana, Istra</p>
+              <p>Šareni svijet tobogana i prskajućih atrakcija u srcu Fažane.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+                <span class="ms-2">3.9</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Park 6 -->
+        <div class="col-lg-4 col-md-6 slideanim">
+          <div class="park-card">
+            <div class="park-image">
+              <img src="images/biograd/biograd.jpg" alt="Aquapark Dalmaland">
+              <div class="park-overlay">
+                <a href="#" class="btn btn-learn-more" data-bs-toggle="modal" data-bs-target="#parkModal6">
+                  <i class="bi bi-info-circle me-2"></i>Saznaj više<i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="park-content">
+              <h4>Aquapark Dalmaland</h4>
+              <p class="text-muted"><i class="bi bi-geo-alt me-1"></i>Biograd na Moru, Dalmacija</p>
+              <p>Vodena zabava za cijelu obitelj u blizini prekrasnog šibenskog arhipelaga.</p>
+              <div class="park-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <span class="ms-2">4.4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="slideanim">
+        <h3 class="text-center mb-4">Što kažu naši posjetitelji</h3>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="testimonial-card text-center p-4">
+                <i class="bi bi-quote fs-1 text-primary"></i>
+                <p class="fs-5 mb-3">"Istralandia je fantastična! Djeca su uživala cijeli dan, a i mi odrasli smo se odlično zabavili. Definitivno ćemo se vratiti!"</p>
+                <h5>Marija K.</h5>
+                <small class="text-muted">Zagreb</small>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="testimonial-card text-center p-4">
+                <i class="bi bi-quote fs-1 text-primary"></i>
+                <p class="fs-5 mb-3">"Aquacolors u Poreču ima najbolje tobogane! Adrenalinski doživljaj za pamćenje. Preporučam svima koji traže uzbuđenje!"</p>
+                <h5>Ivan P.</h5>
+                <small class="text-muted">Split</small>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="testimonial-card text-center p-4">
+                <i class="bi bi-quote fs-1 text-primary"></i>
+                <p class="fs-5 mb-3">"Savršen obiteljski izlet! Aquapark Dalmatia ima sadržaje za sve uzraste. Osoblje je ljubazno, a cijene pristupačne."</p>
+                <h5>Ana M.</h5>
+                <small class="text-muted">Rijeka</small>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-primary rounded-circle p-3"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-primary rounded-circle p-3"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prices Section with D3.js -->
+  <section id="prices" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5 slideanim">
+        <h2 class="section-title">Cijene Ulaznica</h2>
+        <p class="text-muted">Usporedite cijene svih akvaparkova u Hrvatskoj</p>
+      </div>
+
+      <!-- D3.js Chart -->
+      <div class="row mb-5">
+        <div class="col-12 slideanim">
+          <div class="chart-container">
+            <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4">
+              <h4 class="mb-0">Usporedba cijena ulaznica</h4>
+            </div>
+            <div class="price-category-toggle mb-4">
+              <button class="category-btn active" data-category="adult">
+                <i class="bi bi-person-fill"></i>
+                <span>Odrasli</span>
+              </button>
+              <button class="category-btn" data-category="child">
+                <i class="bi bi-emoji-smile-fill"></i>
+                <span>Djeca</span>
+              </button>
+              <button class="category-btn" data-category="senior">
+                <i class="bi bi-person-hearts"></i>
+                <span>Umirovljenici</span>
+              </button>
+              <button class="category-btn" data-category="family">
+                <i class="bi bi-people-fill"></i>
+                <span>Obitelj</span>
+              </button>
+            </div>
+            <div class="chart-controls mb-3 text-center">
+              <button class="btn btn-outline-primary btn-sm me-2 active" data-chart="bar">
+                <i class="bi bi-bar-chart me-1"></i>Stupčasti
+              </button>
+              <button class="btn btn-outline-primary btn-sm" data-chart="pie">
+                <i class="bi bi-pie-chart me-1"></i>Kružni
+              </button>
+            </div>
+            <div id="priceChart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Cards Carousel -->
+      <div class="slideanim">
+        <div id="priceCarousel" class="carousel slide carousel-fade" data-bs-ride="false">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#priceCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#priceCarousel" data-bs-slide-to="1"></button>
+          </div>
+          <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="carousel-item active">
+              <div class="row g-4 justify-content-center px-4">
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card">
+                    <div class="price-header">
+                      <h4>Aquapark Istralandia</h4>
+                      <div class="price-badge">Najpopularniji</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">32</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Svi tobogani uključeni</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Bazen s valovima</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Dječja zona</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Besplatan parking</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card featured">
+                    <div class="price-header">
+                      <h4>Aquacolors Poreč</h4>
+                      <div class="price-badge">Najbolja Vrijednost</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">35</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> 20+ tobogana</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Adrenalinska zona</li>
+                        <li><i class="bi bi-check-circle-fill"></i> VIP opcije</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Restorani na mjestu</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card">
+                    <div class="price-header">
+                      <h4>Aquapark Dalmatia</h4>
+                      <div class="price-badge">Zatvoreni Park</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">25</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Zatvoreni bazeni</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Wellness zona</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Dječji programi</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Popusti za goste hotela</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Second Slide -->
+            <div class="carousel-item">
+              <div class="row g-4 justify-content-center px-4">
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card">
+                    <div class="price-header">
+                      <h4>Aquapark Čikat</h4>
+                      <div class="price-badge">Morski Ambijent</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">20</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Bazeni s morskom vodom</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Tobogani uz more</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Borova šuma</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Plaža u blizini</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card">
+                    <div class="price-header">
+                      <h4>Aquapark Martilandia</h4>
+                      <div class="price-badge">Za Djecu</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">18</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Šareni tobogani</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Interaktivne igračke</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Animacijski programi</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Obiteljski bazeni</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="price-card">
+                    <div class="price-header">
+                      <h4>Aquapark Dalmaland</h4>
+                      <div class="price-badge">Obiteljski</div>
+                    </div>
+                    <div class="price-body">
+                      <div class="price-amount">
+                        <span class="currency">€</span>
+                        <span class="amount">22</span>
+                        <span class="period">/dan</span>
+                      </div>
+                      <ul class="price-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Cijeli dan korištenja</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Raznovrsni tobogani</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Obiteljska zona</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Dječji bazeni</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Blizina plaža</li>
+                      </ul>
+                      <button class="btn btn-primary w-100">Kupi Ulaznicu</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#priceCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-primary rounded-circle p-3"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#priceCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-primary rounded-circle p-3"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5 slideanim">
+        <h2 class="section-title">Kontaktirajte Nas</h2>
+        <p class="text-muted">Imate pitanja? Slobodno nas kontaktirajte!</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-5 mb-4 mb-lg-0 slideanim">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div class="contact-text">
+                <h5>Adresa</h5>
+                <p>Hrvatska, Istra i Dalmacija</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+              <div class="contact-text">
+                <h5>Telefon</h5>
+                <p>+385 1 234 5678</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+              <div class="contact-text">
+                <h5>Email</h5>
+                <p>info@akvaparkovi-hr.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="bi bi-clock-fill"></i>
+              </div>
+              <div class="contact-text">
+                <h5>Radno Vrijeme</h5>
+                <p>Pon - Ned: 10:00 - 19:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links mt-4">
+            <a href="https://www.facebook.com/" class="social-link" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/" class="social-link" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://x.com/" class="social-link" target="_blank"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.youtube.com/" class="social-link" target="_blank"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-7 slideanim">
+          <form id="contactForm" class="contact-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Ime i prezime</label>
+                <input type="text" class="form-control" id="name" placeholder="Vaše ime" required>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="vasa@email.com" required>
+              </div>
+              <div class="col-12">
+                <label for="subject" class="form-label">Predmet</label>
+                <select class="form-select" id="subject">
+                  <option selected>Odaberite temu...</option>
+                  <option value="info">Opće informacije</option>
+                  <option value="booking">Rezervacija</option>
+                  <option value="prices">Cijene i popusti</option>
+                  <option value="other">Ostalo</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label">Poruka</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Vaša poruka..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                  <i class="bi bi-send me-2"></i>Pošalji Poruku
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-title">
+            <i class="bi bi-water me-2"></i>Akvaparkovi HR
+          </h5>
+          <p class="text-white-50">Vaš vodič kroz najbolje akvaparkove u Hrvatskoj. Otkrijte vodene avanture diljem naše prekrasne obale.</p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h6 class="footer-subtitle">Brzi Linkovi</h6>
+          <ul class="footer-links">
+            <li><a href="#home">Početna</a></li>
+            <li><a href="#about">O nama</a></li>
+            <li><a href="#parks">Akvaparkovi</a></li>
+            <li><a href="#prices">Cijene</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-subtitle">Akvaparkovi</h6>
+          <ul class="footer-links">
+            <li><a href="https://www.istralandia.com/" target="_blank">Istralandia</a></li>
+            <li><a href="https://www.aquacolors.eu/" target="_blank">Aquacolors Poreč</a></li>
+            <li><a href="https://aquapark-dalmatia.com/" target="_blank">Aquapark Dalmatia</a></li>
+            <li><a href="https://www.camp-cikat.com/aquapark-in-cikat.aspx" target="_blank">Aquapark Čikat</a></li>
+            <li><a href="https://www.termesvetimartin.com/hr/martilandia-hr/" target="_blank">Aquapark Martilandia</a></li>
+            <li><a href="https://www.dalmaland.com/" target="_blank">Aquapark Dalmaland</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-subtitle">Newsletter</h6>
+          <p class="text-white-50">Prijavite se za najnovije vijesti i ponude.</p>
+          <form class="newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Vaš email">
+              <button class="btn btn-light" type="submit">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="my-4 bg-white-50">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0 text-white-50">&copy; 2025 Akvaparkovi u Hrvatskoj. Sva prava pridržana.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#home" class="back-to-top">
+            <i class="bi bi-chevron-up"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Park Modals -->
+  <!-- Modal 1 -->
+  <div class="modal" id="parkModal1" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquapark Istralandia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal1" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal1" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal1" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal1" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/istralandia/tobogani1.jpg" class="d-block w-100 modal-carousel-img" alt="Istralandia 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/istralandia/tobogani2.jpg" class="d-block w-100 modal-carousel-img" alt="Istralandia 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/istralandia/tobogani3.jpg" class="d-block w-100 modal-carousel-img" alt="Istralandia 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal1" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal1" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquapark Istralandia je najveći vodeni park u Hrvatskoj, smješten u Brtonigli u Istri. Park se prostire na 80.000 m² i nudi brojne atrakcije za sve uzraste.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Najveći bazen s valovima na Sredozemlju</li>
+            <li>20+ različitih tobogana</li>
+            <li>Dječja zona s plitkim bazenima</li>
+            <li>Rijeka za opuštanje</li>
+            <li>Adrenalinski tobogani za hrabre</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://www.istralandia.com/" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div class="modal" id="parkModal2" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquacolors Poreč</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal2" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal2" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal2" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal2" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/porec/tobogani1.jpg" class="d-block w-100 modal-carousel-img" alt="Aquacolors 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/porec/tobogani2.jpg" class="d-block w-100 modal-carousel-img" alt="Aquacolors 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/porec/tobogani3.jpg" class="d-block w-100 modal-carousel-img" alt="Aquacolors 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal2" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal2" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquacolors je najveći adrenalinski vodeni park u Hrvatskoj, poznat po svojim uzbudljivim toboganiima i obiteljskim atrakcijama.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Preko 20 tobogana svih vrsta</li>
+            <li>Adrenalinska zona s ekstremnim toboganiima</li>
+            <li>Obiteljski bazeni</li>
+            <li>Lazy river</li>
+            <li>VIP kabane za ekskluzivno iskustvo</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://www.aquacolors.eu/" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div class="modal" id="parkModal3" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquapark Dalmatia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal3" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal3" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal3" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal3" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/sibenik/tobogani1.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmatia 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/sibenik/tobogani2.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmatia 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/sibenik/tobogani3.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmatia 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal3" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal3" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquapark Dalmatia je moderni zatvoreni akvapark u sklopu Amadria Park resorta u Šibeniku. Idealan za posjet tijekom cijele godine.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Zatvoreni bazeni s grijanom vodom</li>
+            <li>Wellness i spa zona</li>
+            <li>Dječji programi i animacije</li>
+            <li>Tobogani za sve uzraste</li>
+            <li>Restorani i barovi</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://aquapark-dalmatia.com/" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4 -->
+  <div class="modal" id="parkModal4" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquapark Čikat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal4" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal4" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal4" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal4" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/cikat/tobogani1.jpeg" class="d-block w-100 modal-carousel-img" alt="Čikat 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/cikat/tobogani2.jpeg" class="d-block w-100 modal-carousel-img" alt="Čikat 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/cikat/tobogani3.jpeg" class="d-block w-100 modal-carousel-img" alt="Čikat 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal4" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal4" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquapark Čikat smješten je na prekrasnom otoku Lošinju, okružen mirisima borove šume i kristalno čistim morem.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Bazeni s morskom vodom</li>
+            <li>Tobogani uz more</li>
+            <li>Dječja igrališta</li>
+            <li>Plaža u neposrednoj blizini</li>
+            <li>Prirodni ambijent borove šume</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://www.camp-cikat.com/aquapark-in-cikat.aspx" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div class="modal" id="parkModal5" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquapark Martilandia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal5" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal5" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal5" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal5" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/martilandia/tobogani1.jpg" class="d-block w-100 modal-carousel-img" alt="Martilandia 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/martilandia/tobogani2.jpg" class="d-block w-100 modal-carousel-img" alt="Martilandia 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/martilandia/tobogani3.jpg" class="d-block w-100 modal-carousel-img" alt="Martilandia 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal5" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal5" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquapark Martilandia nudi šareni svijet tobogana i vodenih atrakcija u srcu Fažane, idealan za obitelji s djecom.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Šareni tobogani za djecu</li>
+            <li>Interaktivne vodene igračke</li>
+            <li>Obiteljski bazeni</li>
+            <li>Animacijski programi</li>
+            <li>Catering i ugostiteljstvo</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://www.termesvetimartin.com/hr/martilandia-hr/" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6 -->
+  <div class="modal" id="parkModal6" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aquapark Dalmaland</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Image Carousel -->
+          <div id="carouselModal6" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselModal6" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carouselModal6" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carouselModal6" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded">
+              <div class="carousel-item active">
+                <img src="images/biograd/tobogani1.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmaland 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/biograd/tobogani2.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmaland 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/biograd/tobogani3.jpg" class="d-block w-100 modal-carousel-img" alt="Dalmaland 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal6" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselModal6" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <p>Aquapark Dalmaland nudi vodenu zabavu za cijelu obitelj, s pogledom na prekrasan dalmatinski arhipelag.</p>
+          <h6>Glavne atrakcije:</h6>
+          <ul>
+            <li>Raznovrsni tobogani</li>
+            <li>Obiteljska zona</li>
+            <li>Dječji bazeni</li>
+            <li>Ugostiteljski objekti</li>
+            <li>Blizina plaža i prirodnih ljepota</li>
+          </ul>
+          <div class="official-website-link mt-3">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://www.dalmaland.com/" target="_blank" rel="noopener noreferrer" class="text-primary fw-bold">Službena web stranica</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary">Kupi Ulaznicu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
+
+  <!-- Start of ChatBot (www.chatbot.com) code -->
+  <script>
+    window.__ow = window.__ow || {};
+    window.__ow.organizationId = "639acb31-a875-4175-bde4-b816b3a9899d";
+    window.__ow.template_id = "a28aa7b6-3c76-4af8-aa09-ffd6a34e0d60";
+    window.__ow.integration_name = "manual_settings";
+    window.__ow.product_name = "chatbot";   
+    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
+  </script>
+  <noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
+  <!-- End of ChatBot code -->
+
+</body>
+</html>
