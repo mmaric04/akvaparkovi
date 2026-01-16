@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics Dashboard - Akvaparkovi u Hrvatskoj</title>
     
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K41V3G1YGJ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,19 +13,14 @@
         gtag('config', 'G-K41V3G1YGJ');
     </script>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
-    <!-- D3.js -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <link rel="stylesheet" href="styles.css">
@@ -409,7 +403,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner">
             <div class="spinner-border" role="status"></div>
@@ -417,7 +410,6 @@
         </div>
     </div>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -443,9 +435,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <!-- Dashboard Header -->
         <div class="dashboard-header" style="margin-top: 76px;">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -457,15 +447,11 @@
                         <button class="btn btn-outline-light" onclick="refreshData()">
                             <i class="bi bi-arrow-clockwise me-1"></i> Osvježi
                         </button>
-                        <a href="index.html" class="btn btn-light">
-                            <i class="bi bi-house me-1"></i> Početna
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Data Note -->
         <div class="container">
             <div class="data-note" id="dataNote">
                 <i class="bi bi-info-circle me-2"></i>
@@ -473,7 +459,6 @@
             </div>
         </div>
 
-        <!-- Stats Overview -->
         <div class="container mb-5">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
@@ -551,10 +536,8 @@
             </div>
         </div>
 
-        <!-- Charts Section -->
         <div class="container mb-5">
             <div class="row">
-                <!-- Users by Device -->
                 <div class="col-lg-6 mb-4">
                     <div class="chart-card">
                         <h4 class="chart-title"><i class="bi bi-phone me-2"></i>Korisnici po uređaju</h4>
@@ -564,7 +547,6 @@
                     </div>
                 </div>
                 
-                <!-- Users Over Time -->
                 <div class="col-lg-6 mb-4">
                     <div class="chart-card">
                         <h4 class="chart-title"><i class="bi bi-graph-up-arrow me-2"></i>Korisnici kroz vrijeme</h4>
@@ -574,7 +556,6 @@
                     </div>
                 </div>
                 
-                <!-- Top Pages -->
                 <div class="col-lg-6 mb-4">
                     <div class="chart-card">
                         <h4 class="chart-title"><i class="bi bi-file-earmark-text me-2"></i>Najpopularnije stranice</h4>
@@ -584,7 +565,6 @@
                     </div>
                 </div>
                 
-                <!-- Traffic Sources -->
                 <div class="col-lg-6 mb-4">
                     <div class="chart-card">
                         <h4 class="chart-title"><i class="bi bi-signpost-split me-2"></i>Izvori prometa</h4>
@@ -596,7 +576,6 @@
             </div>
         </div>
 
-        <!-- Recommendation System Section -->
         <div class="recommendation-section">
             <div class="container">
                 <div class="text-center mb-5">
@@ -605,7 +584,6 @@
                 </div>
                 
                 <div class="row g-4" id="recommendationsContainer">
-                    <!-- Recommendations will be inserted here -->
                 </div>
 
                 <div class="interpretation-box mt-4">
@@ -615,7 +593,6 @@
             </div>
         </div>
 
-        <!-- Analysis Section -->
         <div class="analysis-section">
             <div class="container">
                 <div class="text-center mb-5">
@@ -623,13 +600,11 @@
                     <p class="text-muted mt-4">Detaljne analize korisničkih uzoraka</p>
                 </div>
 
-                <!-- Funnel Analysis -->
                 <div class="analysis-card">
                     <h3><i class="bi bi-funnel"></i> Funnel analiza</h3>
                     <p class="text-muted mb-4">Idealni korisnički tok: Početna → O nama → Akvaparkovi → Kontakt</p>
                     
                     <div id="funnelContainer">
-                        <!-- Funnel will be generated here -->
                     </div>
 
                     <div class="interpretation-box">
@@ -643,7 +618,6 @@
                     </div>
                 </div>
 
-                <!-- Retention Analysis -->
                 <div class="analysis-card">
                     <h3><i class="bi bi-arrow-repeat"></i> Retention analiza</h3>
                     <p class="text-muted mb-4">Postotak korisnika koji se vraćaju na stranicu</p>
@@ -659,7 +633,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Data will be inserted here -->
                         </tbody>
                     </table>
 
@@ -674,13 +647,11 @@
                     </div>
                 </div>
 
-                <!-- Path Analysis -->
                 <div class="analysis-card">
                     <h3><i class="bi bi-signpost-2"></i> Path analiza</h3>
                     <p class="text-muted mb-4">Najčešće korisničke putanje kroz stranicu</p>
                     
                     <div id="pathContainer">
-                        <!-- Paths will be generated here -->
                     </div>
 
                     <div class="interpretation-box">
@@ -697,7 +668,6 @@
         </div>
     </div>
 
-    <!-- Not Authenticated Content -->
     <div id="notAuthContent" class="not-authenticated" style="display: none; margin-top: 100px;">
         <i class="bi bi-shield-lock"></i>
         <h2>Potrebna autentifikacija</h2>
@@ -712,27 +682,21 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Google Identity Services Library -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
-    <!-- Configuration -->
     <script src="config.js"></script>
     
     <script>
-        // Global variables
         let accessToken = null;
         let analyticsData = {};
         let charts = {};
 
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             checkAuthentication();
         });
 
-        // Check if user is authenticated
         function checkAuthentication() {
             const token = sessionStorage.getItem('google_access_token');
             const expires = sessionStorage.getItem('token_expires');
@@ -741,7 +705,6 @@
             if (token && expires && Date.now() < parseInt(expires)) {
                 accessToken = token;
                 
-                // Show user info in navbar
                 if (userData) {
                     const user = JSON.parse(userData);
                     document.getElementById('userBadge').style.display = 'flex';
@@ -749,11 +712,9 @@
                     document.getElementById('navUserName').textContent = user.name;
                 }
 
-                // Show main content
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('notAuthContent').style.display = 'none';
 
-                // Load analytics data
                 loadAnalyticsData();
             } else {
                 // Not authenticated
@@ -761,12 +722,10 @@
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('notAuthContent').style.display = 'block';
                 
-                // Initialize Google Auth for sign-in button
                 initGoogleAuth();
             }
         }
 
-        // Google OAuth for sign-in from this page
         let tokenClient;
         const SCOPES = [
             'https://www.googleapis.com/auth/analytics.readonly',
@@ -822,17 +781,14 @@
                 console.error('Error fetching user info:', error);
             }
             
-            // Show main content and load data
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('notAuthContent').style.display = 'none';
             document.getElementById('loadingOverlay').style.display = 'flex';
             loadAnalyticsData();
         }
 
-        // Load Analytics Data - SAMO STVARNI PODACI
         async function loadAnalyticsData() {
             try {
-                // Fetch real data from Google Analytics API
                 const realData = await fetchGoogleAnalyticsData();
                 
                 if (realData && realData.rows && realData.rows.length > 0) {
@@ -843,7 +799,6 @@
                     document.getElementById('dataNote').style.background = '#d4edda';
                     document.getElementById('dataNote').style.border = '1px solid #c3e6cb';
                     
-                    // Update UI with real data
                     updateStatsCards();
                     createCharts();
                     generateRecommendations();
@@ -851,14 +806,12 @@
                     generateRetentionAnalysis();
                     generatePathAnalysis();
                 } else {
-                    // Nema podataka - prikaži poruku
                     document.getElementById('dataNote').innerHTML = 
                         '<i class="bi bi-exclamation-triangle me-2" style="color: #856404;"></i>' +
                         '<strong>Nema podataka:</strong> Google Analytics API nije vratio podatke. Stranica možda još nema dovoljno prometa ili podaci nisu dostupni za odabrani period.';
                     document.getElementById('dataNote').style.background = '#fff3cd';
                     document.getElementById('dataNote').style.border = '1px solid #ffc107';
                     
-                    // Prikaži prazne/nulte vrijednosti
                     analyticsData = getEmptyData();
                     updateStatsCards();
                     createCharts();
@@ -888,7 +841,6 @@
             }
         }
 
-        // Prazni podaci kada nema stvarnih
         function getEmptyData() {
             return {
                 totalUsers: 0,
@@ -910,7 +862,6 @@
             };
         }
 
-        // Fetch data from Google Analytics Data API
         async function fetchGoogleAnalyticsData() {
             const propertyId = CONFIG.GA_PROPERTY_ID;
             const url = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`;
@@ -955,7 +906,6 @@
             }
         }
 
-        // Fetch page views data from Google Analytics API
         async function fetchPageViewsData() {
             const propertyId = CONFIG.GA_PROPERTY_ID;
             const url = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`;
@@ -995,9 +945,7 @@
             }
         }
 
-        // Process real data from Google Analytics
         function processRealData(data) {
-            // Process the API response into usable format
             let totalUsers = 0;
             let totalSessions = 0;
             let totalPageviews = 0;
@@ -1051,13 +999,12 @@
             };
         }
 
-        // Generate daily data from API response
         function generateDailyDataFromAPI(data) {
             const dailyMap = {};
             
             if (data.rows) {
                 data.rows.forEach(row => {
-                    const dateStr = row.dimensionValues[0].value; // Format: YYYYMMDD
+                    const dateStr = row.dimensionValues[0].value; 
                     const users = parseInt(row.metricValues[0].value) || 0;
                     
                     if (!dailyMap[dateStr]) {
@@ -1067,7 +1014,6 @@
                 });
             }
             
-            // Convert to array and format dates
             const sortedDates = Object.keys(dailyMap).sort();
             return sortedDates.map(dateStr => {
                 const year = dateStr.substring(0, 4);
@@ -1082,7 +1028,6 @@
             });
         }
 
-        // Update stats cards
         function updateStatsCards() {
             document.getElementById('totalUsers').textContent = analyticsData.totalUsers.toLocaleString();
             document.getElementById('totalSessions').textContent = analyticsData.totalSessions.toLocaleString();
@@ -1091,7 +1036,6 @@
             document.getElementById('bounceRate').textContent = (typeof analyticsData.bounceRate === 'number' ? analyticsData.bounceRate.toFixed(1) : analyticsData.bounceRate) + '%';
             document.getElementById('totalEvents').textContent = analyticsData.totalEvents.toLocaleString();
 
-            // Sakrij promjene jer nemamo podatke za usporedbu
             document.getElementById('usersChange').innerHTML = '<span class="text-muted">Stvarni podaci</span>';
             document.getElementById('sessionsChange').innerHTML = '<span class="text-muted">Stvarni podaci</span>';
             document.getElementById('pageviewsChange').innerHTML = '<span class="text-muted">Stvarni podaci</span>';
@@ -1100,14 +1044,12 @@
             document.getElementById('eventsChange').innerHTML = '<span class="text-muted">Stvarni podaci</span>';
         }
 
-        // Format duration in seconds to readable format
         function formatDuration(seconds) {
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}m ${secs}s`;
         }
 
-        // Create all charts
         function createCharts() {
             createDeviceChart();
             createUsersTimeChart();
@@ -1115,7 +1057,6 @@
             createTrafficChart();
         }
 
-        // Device Chart (Pie)
         function createDeviceChart() {
             const ctx = document.getElementById('deviceChart').getContext('2d');
             
@@ -1156,7 +1097,6 @@
             });
         }
 
-        // Users Over Time Chart (Line)
         function createUsersTimeChart() {
             const ctx = document.getElementById('usersTimeChart').getContext('2d');
             
@@ -1192,13 +1132,11 @@
             });
         }
 
-        // Pages Chart (Horizontal Bar) - koristi stvarne podatke iz API-ja
         async function createPagesChart() {
             const ctx = document.getElementById('pagesChart').getContext('2d');
             
             if (charts.pages) charts.pages.destroy();
             
-            // Dohvati podatke o stranicama iz API-ja
             let pages = [];
             try {
                 const pagesData = await fetchPageViewsData();
@@ -1212,7 +1150,6 @@
                 console.error('Error fetching page views:', error);
             }
             
-            // Ako nema podataka, prikaži poruku
             if (pages.length === 0) {
                 pages = [{ name: 'Nema podataka', views: 0 }];
             }
@@ -1242,7 +1179,6 @@
             });
         }
 
-        // Traffic Sources Chart (Pie)
         function createTrafficChart() {
             const ctx = document.getElementById('trafficChart').getContext('2d');
             
@@ -1278,17 +1214,15 @@
             });
         }
 
-        // Recommendation System using Cosine Similarity
         function generateRecommendations() {
             const container = document.getElementById('recommendationsContainer');
             
-            // Aquapark profiles (feature vectors)
             const aquaparks = [
                 {
                     name: 'Istralandia',
                     location: 'Istra',
                     image: 'images/istralandia/istralandia.jpg',
-                    features: [0.9, 0.8, 0.7, 0.9, 0.6], // [tobogani, bazeni, za_djecu, adrenalin, wellness]
+                    features: [0.9, 0.8, 0.7, 0.9, 0.6], 
                     description: 'Najveći akvapark u Hrvatskoj s mnoštvom tobogana'
                 },
                 {
@@ -1328,26 +1262,22 @@
                 }
             ];
 
-            // Simulated user interaction profile (based on page views, time spent, etc.)
             const userProfile = [
-                Math.random() * 0.5 + 0.5, // Interest in slides
-                Math.random() * 0.5 + 0.4, // Interest in pools
-                Math.random() * 0.5 + 0.3, // Interest in kids activities
-                Math.random() * 0.5 + 0.4, // Interest in adrenaline
-                Math.random() * 0.5 + 0.2  // Interest in wellness
+                Math.random() * 0.5 + 0.5, 
+                Math.random() * 0.5 + 0.4, 
+                Math.random() * 0.5 + 0.3, 
+                Math.random() * 0.5 + 0.4, 
+                Math.random() * 0.5 + 0.2 
             ];
 
-            // Calculate cosine similarity for each aquapark
             const recommendations = aquaparks.map(park => {
                 const similarity = cosineSimilarity(userProfile, park.features);
                 return { ...park, similarity };
             });
 
-            // Sort by similarity and get top 3
             recommendations.sort((a, b) => b.similarity - a.similarity);
             const topRecommendations = recommendations.slice(0, 3);
 
-            // Render recommendations
             container.innerHTML = topRecommendations.map((park, index) => `
                 <div class="col-md-4">
                     <div class="recommendation-card">
@@ -1375,7 +1305,6 @@
             `).join('');
         }
 
-        // Cosine Similarity calculation
         function cosineSimilarity(vecA, vecB) {
             let dotProduct = 0;
             let normA = 0;
@@ -1390,11 +1319,9 @@
             return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
         }
 
-        // Funnel Analysis
         function generateFunnelAnalysis() {
             const container = document.getElementById('funnelContainer');
             
-            // Simulated funnel data
             const funnelData = [
                 { step: 'Početna stranica', users: 1000, percentage: 100 },
                 { step: 'O nama', users: 680, percentage: 68 },
@@ -1424,11 +1351,9 @@
                 'Također, razmislite o dodavanju kratkog pregleda popularnih parkova direktno na početnu stranicu.';
         }
 
-        // Retention Analysis
         function generateRetentionAnalysis() {
             const tableBody = document.getElementById('retentionTable').querySelector('tbody');
             
-            // Simulated retention data
             const retentionData = [
                 { cohort: 'Svi korisnici', day1: 42, day7: 28, day14: 18, day30: 12 },
                 { cohort: 'Desktop', day1: 48, day7: 32, day14: 22, day30: 15 },
@@ -1461,11 +1386,9 @@
             return 'retention-low';
         }
 
-        // Path Analysis
         function generatePathAnalysis() {
             const container = document.getElementById('pathContainer');
             
-            // Simulated path data
             const paths = [
                 { rank: 1, flow: ['Početna', 'Akvaparkovi', 'Istralandia', 'Galerija'], count: 245 },
                 { rank: 2, flow: ['Početna', 'O nama', 'Akvaparkovi', 'Kontakt'], count: 189 },
@@ -1499,7 +1422,6 @@
                 'jer je to ključna točka u korisničkom putovanju.';
         }
 
-        // Refresh data
         function refreshData() {
             document.getElementById('loadingOverlay').style.display = 'flex';
             loadAnalyticsData();

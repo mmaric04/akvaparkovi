@@ -1067,6 +1067,46 @@
     </div>
   </div>
 
+  <!-- Login Modal za Analytics -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, #156EA1 0%, #3397d0 100%); border-radius: 0;">
+          <h5 class="modal-title text-white" id="loginModalLabel">
+            <i class="bi bi-graph-up me-2"></i>Prijava za Analytics
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-4">
+            <i class="bi bi-shield-lock" style="font-size: 4rem; color: #156EA1;"></i>
+          </div>
+          <h5 class="mb-3">Prijavite se za pristup Analytics Dashboardu</h5>
+          <p class="text-muted mb-4">Za pregled analitičkih podataka potrebna je prijava s Google računom koji ima pristup Google Analytics.</p>
+          
+          <!-- Google Sign-In Button -->
+          <div class="d-flex justify-content-center mb-3">
+            <div id="googleSignInButton"></div>
+          </div>
+          
+          <div class="divider d-flex align-items-center my-3">
+            <hr class="flex-grow-1">
+            <span class="mx-3 text-muted">ili</span>
+            <hr class="flex-grow-1">
+          </div>
+          
+          <!-- Alternativni popup gumb -->
+          <button class="btn btn-outline-primary" onclick="signInWithPopup()">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Prijava putem popup-a
+          </button>
+        </div>
+        <div class="modal-footer justify-content-center border-0">
+          <small class="text-muted">Vaši podaci su sigurni i koriste se samo za pristup Analytics API-ju.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="scripts.js"></script>
   
@@ -1091,17 +1131,35 @@
         return;
       }
       
+      // OAuth token client za programatski pristup
       tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CONFIG.GOOGLE_CLIENT_ID,
         scope: SCOPES,
         callback: handleTokenResponse,
       });
+      
+      // Renderaj Google Sign-In gumb u modal
+      google.accounts.id.initialize({
+        client_id: CONFIG.GOOGLE_CLIENT_ID,
+        callback: handleGoogleSignInResponse
+      });
+      
+      google.accounts.id.renderButton(
+        document.getElementById('googleSignInButton'),
+        { 
+          theme: 'outline', 
+          size: 'large',
+          text: 'signin_with',
+          shape: 'rectangular',
+          width: 280
+        }
+      );
     }
     
     // Pokreni inicijalizaciju
     document.addEventListener('DOMContentLoaded', initGoogleAuth);
     
-    // Klik na Analytics link
+    // Klik na Analytics link - otvori modal za prijavu
     function handleAnalyticsClick(event) {
       event.preventDefault();
       
@@ -1113,12 +1171,27 @@
         // Već je prijavljen, idi na analytics
         window.location.href = 'analytics.html';
       } else {
-        // Pokreni OAuth
-        if (tokenClient) {
-          tokenClient.requestAccessToken({ prompt: 'consent' });
-        } else {
-          alert('Google Auth se još učitava. Pokušajte ponovno za nekoliko sekundi.');
-        }
+        // Otvori modal za prijavu
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+      }
+    }
+    
+    // Prijava putem popup-a (alternativna metoda)
+    function signInWithPopup() {
+      if (tokenClient) {
+        tokenClient.requestAccessToken({ prompt: 'consent' });
+      } else {
+        alert('Google Auth se još učitava. Pokušajte ponovno za nekoliko sekundi.');
+      }
+    }
+    
+    // Handle Google Sign-In button response (ID token)
+    async function handleGoogleSignInResponse(response) {
+      // Google Sign-In gumb vraća ID token, trebamo ga zamijeniti za access token
+      // Za Analytics API trebamo OAuth access token, pa ćemo pokrenuti token flow
+      if (tokenClient) {
+        tokenClient.requestAccessToken({ prompt: 'none' });
       }
     }
     
@@ -1134,6 +1207,13 @@
       // Spremi token
       sessionStorage.setItem('google_access_token', accessToken);
       sessionStorage.setItem('token_expires', Date.now() + (response.expires_in * 1000));
+      
+      // Zatvori modal ako je otvoren
+      const loginModalEl = document.getElementById('loginModal');
+      const loginModal = bootstrap.Modal.getInstance(loginModalEl);
+      if (loginModal) {
+        loginModal.hide();
+      }
       
       // Dohvati korisničke podatke
       try {
