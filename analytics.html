@@ -731,6 +731,7 @@
         let tokenClient;
         const SCOPES = [
             'https://www.googleapis.com/auth/analytics.readonly',
+            'https://www.googleapis.com/auth/analytics.edit',  // Za pristup Admin API
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email'
         ].join(' ');
@@ -791,13 +792,73 @@
 
         async function loadAnalyticsData() {
             try {
+                // Dijagnostika - ispis u konzolu
+                console.log('=== GA4 API Diagnostics ===');
+                console.log('Property ID:', CONFIG.GA_PROPERTY_ID);
+                console.log('Access Token exists:', !!accessToken);
+                
+                // Dohvati listu dostupnih propertija za dijagnostiku
+                console.log('Fetching available properties...');
+                const availableProperties = await listAvailableProperties();
+                
+                // Provjeri realtime podatke
+                console.log('Checking realtime data...');
+                const realtimeData = await fetchRealtimeData();
+                if (realtimeData) {
+                    console.log('Realtime active users:', realtimeData.rows ? realtimeData.rows[0]?.metricValues[0]?.value : '0');
+                }
+                
+                // Prvo testiraj pristup GA4 API-ju
+                const testResult = await testGA4Access();
+                if (testResult.error) {
+                    console.error('GA4 Access Test Failed:', testResult.error);
+                    
+                    // Prikaži dostupne propertije ako postoje
+                    let propertiesList = '';
+                    if (availableProperties && availableProperties.accountSummaries) {
+                        propertiesList = '<br><br><strong>Dostupni GA4 propertiji na vašem računu:</strong><ul>';
+                        availableProperties.accountSummaries.forEach(account => {
+                            if (account.propertySummaries) {
+                                account.propertySummaries.forEach(prop => {
+                                    const propId = prop.property.replace('properties/', '');
+                                    propertiesList += `<li><strong>${prop.displayName}</strong> - Property ID: <code>${propId}</code></li>`;
+                                });
+                            }
+                        });
+                        propertiesList += '</ul><small>Kopirajte ispravan Property ID u <code>env-config.js</code> datoteku.</small>';
+                    }
+                    
+                    document.getElementById('dataNote').innerHTML = 
+                        `<i class="bi bi-x-circle me-2" style="color: #721c24;"></i>
+                        <strong>Greška pristupa GA4:</strong> ${testResult.error.message || testResult.error}<br>
+                        <small>Trenutni Property ID: <code>${CONFIG.GA_PROPERTY_ID}</code></small><br>
+                        <small class="text-muted">Provjerite da je Property ID ispravan i da imate pristup tom GA4 property-ju.</small>
+                        ${propertiesList}`;
+                    document.getElementById('dataNote').style.background = '#f8d7da';
+                    document.getElementById('dataNote').style.border = '1px solid #f5c6cb';
+                    
+                    analyticsData = getEmptyData();
+                    updateStatsCards();
+                    createCharts();
+                    await generateRecommendations();
+                    await generateFunnelAnalysis();
+                    await generateRetentionAnalysis();
+                    await generatePathAnalysis();
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    return;
+                }
+
                 const realData = await fetchGoogleAnalyticsData();
+                
+                console.log('API Response:', realData);
+                console.log('API Response stringified:', JSON.stringify(realData, null, 2));
                 
                 if (realData && realData.rows && realData.rows.length > 0) {
                     analyticsData = processRealData(realData);
                     document.getElementById('dataNote').innerHTML = 
                         '<i class="bi bi-check-circle me-2" style="color: #28a745;"></i>' +
-                        '<strong>Stvarni podaci:</strong> Podaci su uspješno dohvaćeni iz Google Analytics API-ja.';
+                        '<strong>Stvarni podaci:</strong> Podaci su uspješno dohvaćeni iz Google Analytics API-ja.' +
+                        `<br><small class="text-muted">Dohvaćeno ${realData.rows.length} redaka podataka za property ${CONFIG.GA_PROPERTY_ID}</small>`;
                     document.getElementById('dataNote').style.background = '#d4edda';
                     document.getElementById('dataNote').style.border = '1px solid #c3e6cb';
                     
@@ -808,9 +869,20 @@
                     await generateRetentionAnalysis();
                     await generatePathAnalysis();
                 } else {
+                    // Detaljniji prikaz odgovora kada nema podataka
+                    let debugInfo = '';
+                    if (realData) {
+                        debugInfo = `<br><small>API odgovor: rowCount=${realData.rowCount || 0}, metadata=${realData.metadata ? 'yes' : 'no'}</small>`;
+                        console.log('realData exists but no rows. Full response:', realData);
+                    } else {
+                        debugInfo = '<br><small>API nije vratio nikakav odgovor (null)</small>';
+                    }
+                    
                     document.getElementById('dataNote').innerHTML = 
                         '<i class="bi bi-exclamation-triangle me-2" style="color: #856404;"></i>' +
-                        '<strong>Nema podataka:</strong> Google Analytics API nije vratio podatke. Stranica možda još nema dovoljno prometa ili podaci nisu dostupni za odabrani period.';
+                        '<strong>Nema podataka:</strong> Google Analytics API nije vratio podatke za zadnjih 30 dana.' +
+                        debugInfo +
+                        '<br><small class="text-muted">Provjeri konzolu preglednika (F12) za više detalja.</small>';
                     document.getElementById('dataNote').style.background = '#fff3cd';
                     document.getElementById('dataNote').style.border = '1px solid #ffc107';
                     
@@ -843,6 +915,80 @@
             }
         }
 
+        // Funkcija za testiranje pristupa GA4 API-ju
+        async function testGA4Access() {
+            const propertyId = CONFIG.GA_PROPERTY_ID;
+            
+            // Prvo dohvati metadata za property da vidimo ima li pristup
+            const metadataUrl = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}/metadata`;
+            
+            try {
+                const response = await fetch(metadataUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Metadata API Error:', errorData);
+                    return { 
+                        error: errorData.error || { 
+                            message: `HTTP ${response.status}: Nemate pristup ovom GA4 property-ju ili je Property ID neispravan.` 
+                        }
+                    };
+                }
+
+                const metadata = await response.json();
+                console.log('GA4 Metadata:', metadata);
+                return { success: true, metadata };
+            } catch (error) {
+                console.error('Test GA4 Access Error:', error);
+                return { error: { message: error.message } };
+            }
+        }
+
+        // Funkcija za dohvat dostupnih GA4 propertija na koje korisnik ima pristup
+        async function listAvailableProperties() {
+            const url = 'https://analyticsadmin.googleapis.com/v1beta/accountSummaries';
+            
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Admin API Error:', errorData);
+                    return null;
+                }
+
+                const data = await response.json();
+                console.log('Available GA4 Accounts and Properties:', data);
+                
+                // Ispis svih dostupnih propertija
+                if (data.accountSummaries) {
+                    data.accountSummaries.forEach(account => {
+                        console.log(`Account: ${account.displayName} (${account.account})`);
+                        if (account.propertySummaries) {
+                            account.propertySummaries.forEach(prop => {
+                                // Izvuci Property ID iz formata "properties/XXXXXXXXX"
+                                const propId = prop.property.replace('properties/', '');
+                                console.log(`  - Property: ${prop.displayName} | ID: ${propId} | Full: ${prop.property}`);
+                            });
+                        }
+                    });
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('List Properties Error:', error);
+                return null;
+            }
+        }
+
         function getEmptyData() {
             return {
                 totalUsers: 0,
@@ -868,12 +1014,13 @@
             const propertyId = CONFIG.GA_PROPERTY_ID;
             const url = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`;
 
+            // Jednostavniji request - samo osnovne metrike bez previše dimenzija
             const requestBody = {
                 dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
                 dimensions: [
                     { name: 'date' },
                     { name: 'deviceCategory' },
-                    { name: 'sessionSource' }
+                    { name: 'sessionDefaultChannelGroup' }  // Zamjena za sessionSource koji može biti prazan
                 ],
                 metrics: [
                     { name: 'activeUsers' },
@@ -885,6 +1032,8 @@
                 ]
             };
 
+            console.log('Fetching GA4 data with request:', JSON.stringify(requestBody, null, 2));
+
             try {
                 const response = await fetch(url, {
                     method: 'POST',
@@ -895,15 +1044,103 @@
                     body: JSON.stringify(requestBody)
                 });
 
+                const responseData = await response.json();
+
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('GA API Error:', errorData);
+                    console.error('GA API Error Response:', responseData);
+                    
+                    // Ako je greška "property not found", pokušaj dohvatiti listu dostupnih propertija
+                    if (responseData.error && responseData.error.code === 403) {
+                        console.log('Attempting to list available properties...');
+                        await listAvailableProperties();
+                    }
+                    
                     return null;
                 }
 
-                return await response.json();
+                console.log('GA API Success Response:', responseData);
+                console.log('Row count:', responseData.rowCount);
+                console.log('Rows:', responseData.rows);
+                
+                // Ako nema podataka s glavnim requestom, pokušaj jednostavniji
+                if (!responseData.rows || responseData.rows.length === 0) {
+                    console.log('No rows in main request, trying simple request...');
+                    const simpleData = await fetchSimpleGAData();
+                    if (simpleData && simpleData.rows && simpleData.rows.length > 0) {
+                        console.log('Simple request returned data:', simpleData);
+                        return simpleData;
+                    }
+                }
+                
+                return responseData;
             } catch (error) {
                 console.error('Fetch error:', error);
+                return null;
+            }
+        }
+
+        // Najjednostavniji mogući GA4 API poziv
+        async function fetchSimpleGAData() {
+            const propertyId = CONFIG.GA_PROPERTY_ID;
+            const url = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`;
+
+            // Minimalni request - samo jedna metrika, bez dimenzija
+            const requestBody = {
+                dateRanges: [{ startDate: '90daysAgo', endDate: 'today' }],  // Duži period
+                metrics: [
+                    { name: 'sessions' }
+                ]
+            };
+
+            console.log('Trying SIMPLE GA4 request (90 days, sessions only):', requestBody);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+                console.log('Simple request response:', data);
+                return response.ok ? data : null;
+            } catch (error) {
+                console.error('Simple fetch error:', error);
+                return null;
+            }
+        }
+
+        // Provjera realtime podataka
+        async function fetchRealtimeData() {
+            const propertyId = CONFIG.GA_PROPERTY_ID;
+            const url = `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runRealtimeReport`;
+
+            const requestBody = {
+                metrics: [
+                    { name: 'activeUsers' }
+                ]
+            };
+
+            console.log('Fetching REALTIME data...');
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+                console.log('Realtime response:', data);
+                return response.ok ? data : null;
+            } catch (error) {
+                console.error('Realtime fetch error:', error);
                 return null;
             }
         }
