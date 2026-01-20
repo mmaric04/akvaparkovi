@@ -1151,8 +1151,10 @@
 
             const requestBody = {
                 dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+                // Include pageLocation so we can detect fragment/hash (#about, #parks, etc.)
                 dimensions: [
-                    { name: 'pagePath' }
+                    { name: 'pagePath' },
+                    { name: 'pageLocation' }
                 ],
                 metrics: [
                     { name: 'screenPageViews' }
@@ -1380,10 +1382,19 @@
             try {
                 const pagesData = await fetchPageViewsData();
                 if (pagesData && pagesData.rows) {
-                    pages = pagesData.rows.map(row => ({
-                        name: row.dimensionValues[0].value.replace(/\//g, '') || 'Početna',
-                        views: parseInt(row.metricValues[0].value) || 0
-                    })).slice(0, 5);
+                    // Aggregate and normalize page names (dedupe Početna / index.html etc.)
+                    const pageMap = {};
+                    pagesData.rows.forEach(row => {
+                        // prefer pageLocation (index 1) if available so we can detect fragments (#about)
+                        const raw = (row.dimensionValues[1] && row.dimensionValues[1].value) || row.dimensionValues[0].value || '';
+                        const name = normalizePageName(raw);
+                        const views = parseInt(row.metricValues[0].value) || 0;
+                        pageMap[name] = (pageMap[name] || 0) + views;
+                    });
+
+                    pages = Object.keys(pageMap).map(name => ({ name, views: pageMap[name] }))
+                        .sort((a, b) => b.views - a.views)
+                        .slice(0, 5);
                 }
             } catch (error) {
                 console.error('Error fetching page views:', error);
@@ -1695,8 +1706,10 @@
             // Dohvati page views za svaku sekciju
             const requestBody = {
                 dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+                // Include pageLocation so we can inspect fragments like #about
                 dimensions: [
-                    { name: 'pagePath' }
+                    { name: 'pagePath' },
+                    { name: 'pageLocation' }
                 ],
                 metrics: [
                     { name: 'activeUsers' },
@@ -1727,12 +1740,13 @@
             const container = document.getElementById('funnelContainer');
             
             // Definiraj korake funnel-a s mogućim putanjama
+            // Koristimo pageLocation (ako postoji) kako bismo detektirali hash/fragment (npr. #about)
             const funnelSteps = [
                 { step: 'Početna stranica', patterns: ['/', '/index', '/index.html', ''] },
-                { step: 'O nama', patterns: ['#o-nama', '/o-nama', '/#o-nama', 'about'] },
-                { step: 'Akvaparkovi', patterns: ['#akvaparkovi', '/akvaparkovi', '/#akvaparkovi', 'parks'] },
+                { step: 'O nama', patterns: ['about', 'o-nama', 'o nama', '#about'] },
+                { step: 'Akvaparkovi', patterns: ['parks', 'akvaparkovi', '#parks'] },
                 { step: 'Detalji parka', patterns: ['istralandia', 'porec', 'sibenik', 'cikat', 'martilandia', 'biograd'] },
-                { step: 'Kontakt', patterns: ['#kontakt', '/kontakt', '/#kontakt', 'contact'] }
+                { step: 'Kontakt', patterns: ['contact', 'kontakt', '#contact', '#kontakt'] }
             ];
 
             let funnelData = null;
@@ -1755,15 +1769,20 @@
                     let stepViews = 0;
 
                     funnelData.rows.forEach(row => {
-                        const pagePath = row.dimensionValues[0].value.toLowerCase();
+                        // Prefer pageLocation (contains full URL and fragment) if it exists
+                        const raw = (row.dimensionValues[1] && row.dimensionValues[1].value) || row.dimensionValues[0].value || '';
+                        const pagePath = String(raw).toLowerCase();
+                        const hash = (pagePath.split('#')[1] || '').toLowerCase();
                         const users = parseInt(row.metricValues[0].value) || 0;
                         const views = parseInt(row.metricValues[2].value) || 0;
 
                         const matchesStep = step.patterns.some(pattern => {
-                            if (pattern === '' || pattern === '/') {
-                                return pagePath === '/' || pagePath === '' || pagePath === '/index.html';
+                            const p = String(pattern).toLowerCase();
+                            if (p === '' || p === '/') {
+                                return pagePath === '/' || pagePath === '' || pagePath.includes('/index');
                             }
-                            return pagePath.includes(pattern.toLowerCase());
+                            // match against full URL/path OR fragment/hash
+                            return pagePath.includes(p) || hash.includes(p) || pagePath.endsWith('/' + p);
                         });
 
                         if (matchesStep) {
@@ -2073,9 +2092,10 @@
             // Dohvati podatke o landing stranicama i izlaznim stranicama
             const requestBody = {
                 dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+                // Use pageLocation to capture full URL and fragments (hashes)
                 dimensions: [
                     { name: 'landingPage' },
-                    { name: 'pagePath' }
+                    { name: 'pageLocation' }
                 ],
                 metrics: [
                     { name: 'sessions' },
@@ -2113,9 +2133,10 @@
 
             const requestBody = {
                 dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+                // Use pageLocation so events happening on anchor fragments are tied to that fragment/page
                 dimensions: [
                     { name: 'eventName' },
-                    { name: 'pagePath' }
+                    { name: 'pageLocation' }
                 ],
                 metrics: [
                     { name: 'eventCount' },
@@ -2207,8 +2228,10 @@
                         // Dodaj exit ako je stranica zadnja ili dodaj još koraka ako imamo event podatke
                         if (eventFlowData && eventFlowData.rows) {
                             const relevantEvents = eventFlowData.rows.filter(row => {
-                                const pagePath = row.dimensionValues[1].value.toLowerCase();
-                                return pagePath.includes(path.visited.toLowerCase().replace(/\s/g, ''));
+                                const evtRaw = (row.dimensionValues[1] && row.dimensionValues[1].value) || '';
+                                const evtPage = normalizePageName(evtRaw).toLowerCase();
+                                const visitedNorm = String(path.visited).toLowerCase();
+                                return evtPage === visitedNorm || evtPage.includes(visitedNorm);
                             });
 
                             if (relevantEvents.length > 0 && flow.length < 4) {
@@ -2304,8 +2327,12 @@
                 'martilandia': 'Martilandia',
                 'biograd': 'Dalmaland',
                 'kontakt': 'Kontakt',
+                'contact': 'Kontakt',
                 'o-nama': 'O nama',
+                'about': 'O nama',
                 'akvaparkovi': 'Akvaparkovi',
+                'parks': 'Akvaparkovi',
+                'prices': 'Cijene',
                 'analytics': 'Analytics',
                 'galerija': 'Galerija',
                 'cijene': 'Cijene'
